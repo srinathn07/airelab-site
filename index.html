@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIRELab — Artificial Intelligence, Race & Evaluation Lab</title>
+  <meta name="description" content="AIRELab conducts culturally responsive evaluations at the intersection of learning, technology, and labor markets at the University of Tennessee, Knoxville." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* ==========================================
+       CSS CUSTOM PROPERTIES
+    ========================================== */
+    :root {
+      --color-bg:        #fafaf8;
+      --color-surface:   #ffffff;
+      --color-border:    #e8e6e0;
+      --color-navy:      #1a2340;
+      --color-navy-mid:  #2c3a5c;
+      --color-charcoal:  #3a3a3a;
+      --color-muted:     #6b6b6b;
+      --color-accent:    #c8882a;
+      --color-accent-lt: #f5ead8;
+      --color-accent-dk: #a86e1e;
+
+      --font-body:    'Inter', system-ui, sans-serif;
+      --font-heading: 'DM Serif Display', Georgia, serif;
+
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  20px;
+
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md:  0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+      --shadow-lg:  0 12px 40px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.05);
+
+      --transition: 0.25s ease;
+
+      --max-w: 1160px;
+      --nav-h: 68px;
+    }
+
+    /* ==========================================
+       RESET & BASE
+    ========================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-charcoal);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    a:hover { color: var(--color-accent-dk); }
+
+    ::selection { background: var(--color-accent-lt); }
+
+    /* ==========================================
+       UTILITY
+    ========================================== */
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: clamp(20px, 5vw, 60px);
+    }
+
+    .section {
+      padding-block: clamp(72px, 10vw, 120px);
+    }
+
+    .section--alt { background: var(--color-surface); }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--color-navy);
+      line-height: 1.18;
+      margin-bottom: 16px;
+    }
+
+    .section-lead {
+      font-size: 1.05rem;
+      color: var(--color-muted);
+      max-width: 600px;
+      line-height: 1.75;
+    }
+
+    .section-header {
+      margin-bottom: clamp(40px, 6vw, 64px);
+    }
+
+    /* Fade-in scroll animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .stagger > * { transition-delay: 0s; }
+    .stagger > *:nth-child(1) { transition-delay: 0.05s; }
+    .stagger > *:nth-child(2) { transition-delay: 0.12s; }
+    .stagger > *:nth-child(3) { transition-delay: 0.19s; }
+    .stagger > *:nth-child(4) { transition-delay: 0.26s; }
+    .stagger > *:nth-child(5) { transition-delay: 0.33s; }
+    .stagger > *:nth-child(6) { transition-delay: 0.40s; }
+    .stagger > *:nth-child(7) { transition-delay: 0.47s; }
+    .stagger > *:nth-child(8) { transition-delay: 0.54s; }
+
+    /* ==========================================
+       NAVIGATION
+    ========================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      height: var(--nav-h);
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .nav.scrolled {
+      border-color: var(--color-border);
+      box-shadow: 0 1px 12px rgba(0,0,0,.06);
+    }
+
+    .nav .container {
+      height: 100%;
+    }
+
+    .nav__inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav__brand {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: var(--color-navy);
+      line-height: 1.1;
+    }
+
+    .nav__brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      color: var(--color-navy);
+    }
+
+    .nav__brand-sub {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav__links li {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav__links a {
+      display: flex;
+      align-items: center;
+      line-height: 1;
+      padding: 6px 14px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      border-radius: var(--radius-sm);
+      transition: color var(--transition), background var(--transition);
+    }
+
+    .nav__links a:hover {
+      color: var(--color-navy);
+      background: var(--color-accent-lt);
+    }
+
+    .nav__cta {
+      padding: 8px 20px !important;
+      background: var(--color-navy) !important;
+      color: #fff !important;
+      border-radius: var(--radius-sm) !important;
+      font-size: 0.85rem !important;
+    }
+    .nav__cta:hover {
+      background: var(--color-navy-mid) !important;
+      color: #fff !important;
+    }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: var(--radius-sm);
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-navy);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav__hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav__mobile {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: var(--shadow-md);
+      z-index: 899;
+      padding: 16px 0 24px;
+    }
+
+    .nav__mobile.open { display: block; }
+
+    .nav__mobile ul {
+      list-style: none;
+      padding-inline: clamp(20px, 5vw, 60px);
+    }
+
+    .nav__mobile ul li + li { border-top: 1px solid var(--color-border); }
+
+    .nav__mobile ul a {
+      display: block;
+      padding: 12px 0;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+    }
+
+    /* ==========================================
+       HERO
+    ========================================== */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--nav-h);
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(200,136,42,.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 10% 70%, rgba(26,35,64,.05) 0%, transparent 70%),
+        var(--color-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--color-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding-block: 80px;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 24px;
+    }
+
+    .hero__eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--color-accent);
+      border-radius: 2px;
+    }
+
+    .hero__title {
+      font-family: var(--font-heading);
+      font-size: clamp(3.2rem, 8vw, 6rem);
+      line-height: 1.02;
+      color: var(--color-navy);
+      margin-bottom: 12px;
+    }
+
+    .hero__title em {
+      font-style: italic;
+      color: var(--color-accent);
+    }
+
+    .hero__fullname {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      font-weight: 400;
+      color: var(--color-muted);
+      margin-bottom: 28px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero__tagline {
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      font-weight: 300;
+      color: var(--color-charcoal);
+      line-height: 1.5;
+      margin-bottom: 12px;
+      max-width: 640px;
+    }
+
+    .hero__tagline strong {
+      font-weight: 600;
+      color: var(--color-navy);
+    }
+
+    .hero__affiliation {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-muted);
+      margin-bottom: 44px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero__affiliation::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-accent);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .btn--primary {
+      background: var(--color-navy);
+      color: #fff;
+      border: 2px solid var(--color-navy);
+    }
+    .btn--primary:hover {
+      background: var(--color-navy-mid);
+      border-color: var(--color-navy-mid);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(26,35,64,.25);
+    }
+
+    .btn--outline {
+      background: transparent;
+      color: var(--color-navy);
+      border: 2px solid var(--color-navy);
+    }
+    .btn--outline:hover {
+      background: var(--color-navy);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .hero__scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      text-decoration: none;
+      animation: bounce 2.4s ease-in-out infinite;
+    }
+
+    .hero__scroll svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--color-muted);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ==========================================
+       ABOUT
+    ========================================== */
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 80px);
+      align-items: center;
+    }
+
+    .about__text p + p { margin-top: 20px; }
+
+    .about__text p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--color-charcoal);
+    }
+
+    .about__text p:first-child {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--color-navy);
+      line-height: 1.7;
+    }
+
+    .about__pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .pillar {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px 22px;
+      background: var(--color-bg);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--color-accent);
+    }
+
+    .pillar__icon {
+      width: 36px;
+      height: 36px;
+      background: var(--color-accent-lt);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    .pillar__body h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-navy);
+      margin-bottom: 4px;
+    }
+
+    .pillar__body p {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      line-height: 1.55;
+    }
+
+    /* ==========================================
+       RESEARCH
+    ========================================== */
+    .research__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .project-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 32px 30px;
+      position: relative;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-accent);
+    }
+
+    .project-card__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-accent-dk);
+      background: var(--color-accent-lt);
+      border: 1px solid rgba(200,136,42,.25);
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+
+    .project-card__award {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #7a5200;
+      background: linear-gradient(135deg, #fff8e6, #fdf0cc);
+      border: 1px solid #f0d080;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-top: 18px;
+      width: fit-content;
+    }
+
+    .project-card__award::before { content: '🏆'; font-size: 0.8rem; }
+
+    .project-card__date {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .project-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      color: var(--color-navy);
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .project-card__desc {
+      font-size: 0.93rem;
+      color: var(--color-charcoal);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .project-card__meta {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .project-card__pi-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+      margin-bottom: 6px;
+    }
+
+    .project-card__pi {
+      font-size: 0.85rem;
+      color: var(--color-charcoal);
+      line-height: 1.5;
+    }
+
+    .project-card__funder {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: var(--color-muted);
+    }
+
+    .project-card__funder strong {
+      color: var(--color-charcoal);
+      font-weight: 500;
+    }
+
+    /* ==========================================
+       TEAM
+    ========================================== */
+    .team__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .team-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .team-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(200,136,42,.4);
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+
+    .team-card__body { flex: 1; }
+
+    .team-card__name {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      color: var(--color-navy);
+      line-height: 1.25;
+      margin-bottom: 2px;
+    }
+
+    .team-card__role {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+    }
+
+    .team-card__affiliation {
+      font-size: 0.83rem;
+      color: var(--color-charcoal);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .team-card__research {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      line-height: 1.55;
+    }
+
+    .team-card__research strong {
+      font-weight: 600;
+      color: var(--color-charcoal);
+    }
+
+    /* Avatar colors */
+    .av--navy    { background: linear-gradient(135deg, #1a2340, #2c3a5c); }
+    .av--amber   { background: linear-gradient(135deg, #c8882a, #e6a83e); }
+    .av--teal    { background: linear-gradient(135deg, #1a6e6e, #2a9090); }
+    .av--rust    { background: linear-gradient(135deg, #8b3a2f, #b5503e); }
+    .av--violet  { background: linear-gradient(135deg, #4a3070, #6b4fa0); }
+    .av--forest  { background: linear-gradient(135deg, #2a5a2a, #3e8040); }
+    .av--slate   { background: linear-gradient(135deg, #3a4a5c, #526280); }
+    .av--rose    { background: linear-gradient(135deg, #7a3050, #a0486a); }
+
+    /* ==========================================
+       PARTNERS
+    ========================================== */
+    .partners__marquee-wrap {
+      overflow: hidden;
+      position: relative;
+      margin-top: 48px;
+    }
+
+    /* fade edges */
+    .partners__marquee-wrap::before,
+    .partners__marquee-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .partners__marquee-wrap::before {
+      left: 0;
+      background: linear-gradient(to right, var(--color-bg), transparent);
+    }
+    .partners__marquee-wrap::after {
+      right: 0;
+      background: linear-gradient(to left, var(--color-bg), transparent);
+    }
+
+    .partners__track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+
+    .partners__marquee-wrap:hover .partners__track {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .partner-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      height: 90px;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      cursor: default;
+    }
+
+    .partner-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .partner-card img {
+      max-height: 48px;
+      max-width: 180px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.7;
+      transition: filter var(--transition), opacity var(--transition);
+    }
+
+    .partner-card:hover img {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+
+    /* ==========================================
+       NEWS
+    ========================================== */
+    .news__inner {
+      max-width: 760px;
+    }
+
+    .news-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition);
+    }
+
+    .news-card:hover { box-shadow: var(--shadow-md); }
+
+    .news-card__icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, #fff8e6, #fdf0cc);
+      border: 1px solid #f0d080;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .news-card__date {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+    }
+
+    .news-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--color-navy);
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .news-card__body {
+      font-size: 0.93rem;
+      color: var(--color-charcoal);
+      line-height: 1.7;
+    }
+
+    .news-card__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #7a5200;
+      background: linear-gradient(135deg, #fff8e6, #fdf0cc);
+      border: 1px solid #f0d080;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    /* ==========================================
+       CONTACT
+    ========================================== */
+    .contact__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 80px);
+      align-items: start;
+    }
+
+    .contact__info h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: var(--color-navy);
+      margin-bottom: 20px;
+    }
+
+    .contact__item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .contact__item-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--color-accent-lt);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact__item-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--color-accent-dk);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact__item-body label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+      margin-bottom: 3px;
+    }
+
+    .contact__item-body p,
+    .contact__item-body a {
+      font-size: 0.95rem;
+      color: var(--color-charcoal);
+      line-height: 1.5;
+    }
+
+    .contact__item-body a {
+      color: var(--color-accent);
+    }
+
+    .contact__item-body a:hover { color: var(--color-accent-dk); }
+
+    .contact__callout {
+      background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-mid) 100%);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      color: #fff;
+    }
+
+    .contact__callout h3 {
+      font-family: var(--font-heading);
+      font-size: 1.55rem;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .contact__callout p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,.75);
+      margin-bottom: 28px;
+    }
+
+    .contact__callout .btn--light {
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,.3);
+      font-size: 0.88rem;
+    }
+
+    .contact__callout .btn--light:hover {
+      background: rgba(255,255,255,.22);
+      border-color: rgba(255,255,255,.5);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================
+       FOOTER
+    ========================================== */
+    .footer {
+      background: var(--color-navy);
+      color: rgba(255,255,255,.6);
+      padding-block: 36px;
+    }
+
+    .footer__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer__brand {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: #fff;
+    }
+
+    .footer__copy {
+      font-size: 0.82rem;
+    }
+
+    .footer__links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer__links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,.55);
+      transition: color var(--transition);
+    }
+
+    .footer__links a:hover { color: #fff; }
+
+    /* ==========================================
+       RESPONSIVE
+    ========================================== */
+    @media (max-width: 900px) {
+      .about__grid,
+      .contact__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .news-card {
+        flex-direction: column;
+        padding: 28px 24px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav__links { display: none; }
+      .nav__hamburger { display: flex; }
+
+      .hero__title { font-size: clamp(2.8rem, 11vw, 4rem); }
+
+      .research__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .team__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer__inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       NAVIGATION
+  ========================================== -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a class="nav__brand" href="#hero">
+          <span class="nav__brand-name">AIRELab</span>
+          <span class="nav__brand-sub">University of Tennessee, Knoxville</span>
+        </a>
+        <ul class="nav__links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#partners">Partners</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#contact" class="nav__cta">Contact</a></li>
+        </ul>
+        <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="nav__mobile" id="mobileMenu" role="dialog" aria-label="Site navigation">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <main>
+
+    <!-- ==========================================
+         HERO
+    ========================================== -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="hero__inner">
+          <div class="hero__eyebrow">University of Tennessee, Knoxville</div>
+          <h1 class="hero__title">AIRE<em>Lab</em></h1>
+          <p class="hero__fullname">Artificial Intelligence, Race &amp; Evaluation Lab</p>
+          <p class="hero__tagline">
+            <strong>Optimizing Human Potential</strong> &middot;
+            Disrupting Inequalities &middot;
+            Designing Change with AI
+          </p>
+          <span class="hero__affiliation">College of Education, Health &amp; Human Sciences</span>
+          <div class="hero__actions">
+            <a href="#research" class="btn btn--primary">Explore Research</a>
+            <a href="#contact" class="btn btn--outline">Join the Lab</a>
+          </div>
+        </div>
+      </div>
+      <a class="hero__scroll" href="#about" aria-label="Scroll to About section">
+        <span>Scroll</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </a>
+    </section>
+
+    <!-- ==========================================
+         ABOUT
+    ========================================== -->
+    <section class="section section--alt" id="about">
+      <div class="container">
+        <div class="about__grid">
+          <div class="about__text fade-in">
+            <span class="eyebrow">Our Mission</span>
+            <h2 class="section-title">At the Intersection of Learning, Technology &amp; Justice</h2>
+            <p>
+              We work at the intersection of learning, technology, and labor markets — conducting
+              culturally responsive evaluations that are fair, transparent, and inclusive.
+            </p>
+            <p>
+              Our mission is to tackle algorithmic bias while supporting minorities, students of
+              color, and underprivileged communities toward a socially just society grounded in
+              ethics, compassion, and justice.
+            </p>
+            <p>
+              AIRELab brings together researchers, educators, and practitioners across disciplines
+              to design AI-driven solutions that genuinely serve all communities — not just the
+              already-privileged.
+            </p>
+          </div>
+
+          <div class="about__pillars fade-in stagger">
+            <div class="pillar">
+              <div class="pillar__icon">&#9878;</div>
+              <div class="pillar__body">
+                <h4>Culturally Responsive Evaluation</h4>
+                <p>Rigorous mixed-methods research that centers the voices and contexts of
+                marginalized communities.</p>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar__icon">&#9670;</div>
+              <div class="pillar__body">
+                <h4>Algorithmic Fairness</h4>
+                <p>Interrogating AI systems for embedded bias and designing equitable alternatives
+                from the ground up.</p>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar__icon">&#9997;</div>
+              <div class="pillar__body">
+                <h4>Human-Centered AI in Education</h4>
+                <p>Integrating generative AI into critical pedagogy — building literacy, agency,
+                and critical thinking across all learner levels.</p>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar__icon">&#127758;</div>
+              <div class="pillar__body">
+                <h4>Global Development Impact</h4>
+                <p>Partnering with international organizations to address displacement, livelihood,
+                and climate-driven human development challenges.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         RESEARCH
+    ========================================== -->
+    <section class="section" id="research">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="eyebrow">Active Projects</span>
+          <h2 class="section-title">Our Research</h2>
+          <p class="section-lead">
+            Three interconnected research programs examining how AI and evaluation can serve
+            human flourishing — from classrooms in Tennessee to refugee camps in Bangladesh.
+          </p>
+        </div>
+
+        <div class="research__grid stagger">
+
+          <!-- Project 1 -->
+          <article class="project-card fade-in">
+            <div class="project-card__badge">Active Research</div>
+            <div class="project-card__date">2024 &ndash; Present</div>
+            <h3 class="project-card__title">AI-Powered Learning</h3>
+            <p class="project-card__desc">
+              Examines the future of learning and the labor market in the United States and
+              Bangladesh. Integrates generative AI into critical pedagogy — developing AI
+              literacy, critical thinking, and coding skills for learners from middle school
+              through graduate programs.
+            </p>
+            <div class="project-card__award">
+              Winner &mdash; AAAI/ACM SIGAI Innovative AI Education Award, March 2025
+            </div>
+            <div class="project-card__meta">
+              <p class="project-card__pi-label">Principal Investigators</p>
+              <p class="project-card__pi">
+                Fatima Zahra &middot; Shyamal Chowdhury &middot; David Bowers &middot; Jiangen He
+              </p>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card fade-in">
+            <div class="project-card__badge">Active Research</div>
+            <div class="project-card__date">2024 &ndash; Present</div>
+            <h3 class="project-card__title">Sustainable Livelihood for Refugees</h3>
+            <p class="project-card__desc">
+              Investigates employment barriers and livelihood pathways among Rohingya fathers
+              living in refugee camps. The project combines economic analysis with community
+              ethnography to inform durable, dignified policy solutions.
+            </p>
+            <div class="project-card__meta">
+              <p class="project-card__pi-label">Principal Investigators</p>
+              <p class="project-card__pi">
+                Fatima Zahra &middot; Jere Behrman &middot; Nglula Fleurant
+              </p>
+              <p class="project-card__funder">
+                <strong>Funded by:</strong> IKEA Foundation
+              </p>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card fade-in">
+            <div class="project-card__badge">Active Research</div>
+            <div class="project-card__date">2023 &ndash; Present</div>
+            <h3 class="project-card__title">Climate Change &amp; Human Development</h3>
+            <p class="project-card__desc">
+              Examines the links between climate phenomena — air quality, natural disasters,
+              and rising temperatures — and child development outcomes in vulnerable regions
+              across the Global South, informing climate-adaptive social programs.
+            </p>
+            <div class="project-card__meta">
+              <p class="project-card__pi-label">Collaboration</p>
+              <p class="project-card__pi">University of Pennsylvania</p>
+              <p class="project-card__funder">
+                <strong>Funded by:</strong> National Science Foundation (via University of Pennsylvania)
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TEAM
+    ========================================== -->
+    <section class="section section--alt" id="team">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="eyebrow">The People</span>
+          <h2 class="section-title">Our Team</h2>
+          <p class="section-lead">
+            A cross-disciplinary group of faculty, postdoctoral researchers, and students
+            united by a commitment to equity-driven, human-centered research.
+          </p>
+        </div>
+
+        <div class="team__grid stagger">
+
+          <!-- Fatima Zahra -->
+          <div class="team-card fade-in">
+            <div class="avatar av--navy">FZ</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Dr. Fatima T. Zahra</h3>
+              <p class="team-card__role">Founder &amp; Principal Investigator</p>
+              <p class="team-card__affiliation">
+                Assistant Professor, Evaluation, Statistics &amp; Research Methodology<br />
+                University of Tennessee, Knoxville
+              </p>
+              <p class="team-card__research">
+                <strong>Ph.D.</strong> Interdisciplinary Studies in Human Development, University of Pennsylvania<br />
+                <strong>Research:</strong> Culturally responsive evaluation, AI in education, labor markets
+              </p>
+            </div>
+          </div>
+
+          <!-- David Bowers -->
+          <div class="team-card fade-in">
+            <div class="avatar av--teal">DB</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Dr. David M. Bowers</h3>
+              <p class="team-card__role">Faculty Researcher</p>
+              <p class="team-card__affiliation">
+                Research Assistant Professor, Theory &amp; Practice in Teacher Education<br />
+                University of Tennessee, Knoxville
+              </p>
+              <p class="team-card__research">
+                <strong>Ph.D.</strong> Mathematics Education, Michigan State University<br />
+                <strong>Research:</strong> Sociopolitical analysis of education, power dynamics
+              </p>
+            </div>
+          </div>
+
+          <!-- Jiangen He -->
+          <div class="team-card fade-in">
+            <div class="avatar av--forest">JH</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Dr. Jiangen He</h3>
+              <p class="team-card__role">Faculty Researcher</p>
+              <p class="team-card__affiliation">
+                Assistant Professor, School of Information Sciences<br />
+                University of Tennessee, Knoxville
+              </p>
+              <p class="team-card__research">
+                <strong>Ph.D.</strong> Information Studies, Drexel University<br />
+                <strong>Research:</strong> Science of science, human-AI interaction, visual analytics
+              </p>
+            </div>
+          </div>
+
+          <!-- Rushad Faridi -->
+          <div class="team-card fade-in">
+            <div class="avatar av--rust">RF</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Dr. Rushad Faridi</h3>
+              <p class="team-card__role">Postdoctoral Affiliate</p>
+              <p class="team-card__affiliation">
+                Postdoctoral Researcher<br />
+                AIRELab, UTK
+              </p>
+              <p class="team-card__research">
+                <strong>Ph.D.</strong> Economics, Virginia Tech<br />
+                <strong>Experience:</strong> World Bank, UNICEF, JICA<br />
+                <strong>Research:</strong> Development economics, ML for social impact
+              </p>
+            </div>
+          </div>
+
+          <!-- Hanhui Bao -->
+          <div class="team-card fade-in">
+            <div class="avatar av--violet">HB</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Hanhui Bao</h3>
+              <p class="team-card__role">Ph.D. Student</p>
+              <p class="team-card__affiliation">
+                Learning Design &amp; Technology<br />
+                University of Tennessee, Knoxville
+              </p>
+              <p class="team-card__research">
+                <strong>Alumna:</strong> Johns Hopkins University<br />
+                <strong>Research:</strong> STEM education, equity in learning environments
+              </p>
+            </div>
+          </div>
+
+          <!-- Srinath Narayanan -->
+          <div class="team-card fade-in">
+            <div class="avatar av--amber">SN</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Srinath Narayanan</h3>
+              <p class="team-card__role">Undergraduate Research Assistant</p>
+              <p class="team-card__affiliation">
+                Computer Science<br />
+                University of Tennessee, Knoxville
+              </p>
+              <p class="team-card__research">
+                <strong>Research:</strong> AGI, RAG models, AI in education
+              </p>
+            </div>
+          </div>
+
+          <!-- Leah Funderburg -->
+          <div class="team-card fade-in">
+            <div class="avatar av--slate">LF</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Leah Funderburg</h3>
+              <p class="team-card__role">Undergraduate Research Assistant</p>
+              <p class="team-card__affiliation">
+                Data Science &amp; Computer Science<br />
+                University of Tennessee, Knoxville
+              </p>
+              <p class="team-card__research">
+                <strong>Research:</strong> Machine learning, AI in education and labor markets
+              </p>
+            </div>
+          </div>
+
+          <!-- Varun Kilaru -->
+          <div class="team-card fade-in">
+            <div class="avatar av--rose">VK</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Varun Kilaru</h3>
+              <p class="team-card__role">High School Research Assistant</p>
+              <p class="team-card__affiliation">
+                Rising Senior, Ravenwood High School
+              </p>
+              <p class="team-card__research">
+                <strong>Research interests:</strong> Economics and artificial intelligence
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PARTNERS
+    ========================================== -->
+    <section class="section" id="partners">
+      <div class="container">
+        <div class="section-header fade-in" style="text-align:center; max-width:600px; margin-inline:auto;">
+          <span class="eyebrow">Collaboration</span>
+          <h2 class="section-title">Partners &amp; Funders</h2>
+          <p class="section-lead" style="margin-inline:auto;">
+            Our work is made possible through partnerships with leading organizations committed
+            to evidence, equity, and global development.
+          </p>
+        </div>
+
+        <div class="partners__marquee-wrap fade-in" aria-label="Partners">
+          <div class="partners__track">
+            <!-- original set -->
+            <div class="partner-card"><img src="assets/logos/ikea_foundation_logo-1-e1690450171181.png" alt="IKEA Foundation"></div>
+            <div class="partner-card"><img src="assets/logos/20210518_penn_populationstudiescenter_non-nested-scaled-1.jpg" alt="Penn Population Studies Center"></div>
+            <div class="partner-card"><img src="assets/logos/ipa.svg" alt="Innovations for Poverty Action"></div>
+            <div class="partner-card"><img src="assets/logos/lmsai-logo.png" alt="Mittal South Asia Institute, Harvard"></div>
+            <div class="partner-card"><img src="assets/logos/nmsdcasset-1404x-1.png" alt="Measurement Justice"></div>
+            <!-- duplicate for seamless loop -->
+            <div class="partner-card" aria-hidden="true"><img src="assets/logos/ikea_foundation_logo-1-e1690450171181.png" alt=""></div>
+            <div class="partner-card" aria-hidden="true"><img src="assets/logos/20210518_penn_populationstudiescenter_non-nested-scaled-1.jpg" alt=""></div>
+            <div class="partner-card" aria-hidden="true"><img src="assets/logos/ipa.svg" alt=""></div>
+            <div class="partner-card" aria-hidden="true"><img src="assets/logos/lmsai-logo.png" alt=""></div>
+            <div class="partner-card" aria-hidden="true"><img src="assets/logos/nmsdcasset-1404x-1.png" alt=""></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         NEWS
+    ========================================== -->
+    <section class="section section--alt" id="news">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="eyebrow">Recognition</span>
+          <h2 class="section-title">News &amp; Awards</h2>
+        </div>
+
+        <div class="news__inner fade-in">
+          <div class="news-card">
+            <div class="news-card__icon">&#127942;</div>
+            <div>
+              <p class="news-card__date">March 2025</p>
+              <h3 class="news-card__title">
+                AIRELab Wins AAAI/ACM SIGAI Innovative AI Education Award
+              </h3>
+              <p class="news-card__body">
+                AIRELab's <em>"Critical Thinking with Generative AI"</em> project has been
+                recognized with the prestigious AAAI/ACM SIGAI Innovative AI Education Award.
+                The project, led by Dr. Fatima T. Zahra and collaborators, integrates
+                generative AI into critical pedagogy across multiple learning levels — from
+                middle school through graduate education — in the United States and Bangladesh.
+              </p>
+              <span class="news-card__tag">AAAI/ACM SIGAI Award</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         CONTACT
+    ========================================== -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="eyebrow">Get in Touch</span>
+          <h2 class="section-title">Contact AIRELab</h2>
+          <p class="section-lead">
+            Interested in collaboration, joining the lab, or learning more about our work?
+            We'd love to hear from you.
+          </p>
+        </div>
+
+        <div class="contact__grid">
+          <div class="contact__info fade-in">
+            <h3>Reach Us</h3>
+
+            <div class="contact__item">
+              <div class="contact__item-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                  <circle cx="12" cy="9" r="2.5"/>
+                </svg>
+              </div>
+              <div class="contact__item-body">
+                <label>Location</label>
+                <p>527 Bailey Education Complex<br />1126 Volunteer Blvd<br />Knoxville, TN 37996</p>
+              </div>
+            </div>
+
+            <div class="contact__item">
+              <div class="contact__item-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="contact__item-body">
+                <label>General Inquiries</label>
+                <a href="mailto:airelab.online@gmail.com">airelab.online@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="contact__item">
+              <div class="contact__item-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="contact__item-body">
+                <label>Research &amp; Collaboration</label>
+                <a href="mailto:airelab@utk.edu">airelab@utk.edu</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact__callout fade-in">
+            <h3>Join the Lab</h3>
+            <p>
+              We welcome motivated students, researchers, and practitioners who are passionate
+              about equity, AI, and social change. Graduate students, undergraduates, and
+              visiting scholars are encouraged to reach out.
+            </p>
+            <a href="mailto:airelab@utk.edu?subject=Interest in Joining AIRELab" class="btn btn--light">
+              Express Interest &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       FOOTER
+  ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__brand">AIRELab</span>
+        <span class="footer__copy">&copy; 2025 AIRELab &middot; University of Tennessee, Knoxville</span>
+        <ul class="footer__links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT
+  ========================================== -->
+  <script>
+    // ---- Sticky nav scroll state ----
+    const nav = document.getElementById('nav');
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ---- Hamburger menu ----
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    // ---- Intersection Observer for fade-in animations ----
+    const fadeEls = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Once visible, stop observing (one-shot animation)
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    // ---- Active nav link highlighting ----
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav__links a');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.style.color = '';
+            link.style.background = '';
+            if (link.getAttribute('href') === `#${id}`) {
+              link.style.color = 'var(--color-accent)';
+            }
+          });
+        }
+      });
+    }, {
+      rootMargin: '-40% 0px -55% 0px'
+    });
+
+    sections.forEach(s => sectionObserver.observe(s));
+  </script>
+</body>
+</html>
