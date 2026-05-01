@@ -102,7 +102,7 @@
     }
 
     .section-lead {
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       color: var(--color-muted);
       max-width: 600px;
       line-height: 1.75;
@@ -364,16 +364,24 @@
       letter-spacing: 0.01em;
     }
 
-    .hero__tagline {
-      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+    .hero__tagline--primary {
+      font-size: clamp(1.3rem, 2.8vw, 1.7rem);
+      font-weight: 700;
+      color: var(--color-navy);
+      letter-spacing: 0.01em;
+      margin-bottom: 6px;
+    }
+
+    .hero__tagline--secondary {
+      font-size: clamp(1rem, 2vw, 1.2rem);
       font-weight: 300;
-      color: var(--color-charcoal);
+      color: var(--color-muted);
       line-height: 1.5;
       margin-bottom: 12px;
       max-width: 640px;
     }
 
-    .hero__tagline strong {
+    .hero__tagline--primary strong {
       font-weight: 600;
       color: var(--color-navy);
     }
@@ -498,44 +506,135 @@
     }
 
     .about__pillars {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      position: relative;
+    }
+
+    .pillar-slideshow {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
     }
 
     .pillar {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      padding: 20px 22px;
+      display: none;
+      flex-direction: column;
       background: var(--color-bg);
       border-radius: var(--radius-md);
       border-left: 3px solid var(--color-accent);
+      overflow: hidden;
+      animation: pillarFade 0.4s ease;
+    }
+
+    .pillar.active {
+      display: flex;
+    }
+
+    .pillar__image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillar__image svg {
+      width: 40px;
+      height: 40px;
+      opacity: 0.3;
+    }
+
+    .pillar__content {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 22px 24px;
+    }
+
+    @keyframes pillarFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .pillar__icon {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       background: var(--color-accent-lt);
       border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
 
     .pillar__body h4 {
-      font-size: 0.9rem;
+      font-size: 1.05rem;
       font-weight: 600;
       color: var(--color-navy);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .pillar__body p {
-      font-size: 0.85rem;
+      font-size: 0.975rem;
       color: var(--color-muted);
-      line-height: 1.55;
+      line-height: 1.6;
+    }
+
+    .pillar-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .pillar-dots {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .pillar-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .pillar-dot.active {
+      background: var(--color-accent);
+      transform: scale(1.3);
+    }
+
+    .pillar-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-navy);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background var(--transition), border-color var(--transition);
+      flex-shrink: 0;
+    }
+
+    .pillar-btn:hover {
+      background: var(--color-accent-lt);
+      border-color: var(--color-accent);
     }
 
     /* ==========================================
@@ -618,7 +717,7 @@
     }
 
     .project-card__desc {
-      font-size: 0.93rem;
+      font-size: 1rem;
       color: var(--color-charcoal);
       line-height: 1.7;
       flex: 1;
@@ -640,15 +739,47 @@
     }
 
     .project-card__pi {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       color: var(--color-charcoal);
       line-height: 1.5;
     }
 
     .project-card__funder {
       margin-top: 10px;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       color: var(--color-muted);
+    }
+
+    .project-card__icons {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .project-card__icons span {
+      width: 32px;
+      height: 32px;
+      background: var(--color-accent-lt);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+    }
+
+    .project-card__funders {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .project-card__funders img {
+      max-height: 32px;
+      max-width: 130px;
+      object-fit: contain;
+      opacity: 0.8;
+      filter: grayscale(30%);
     }
 
     .project-card__funder strong {
@@ -708,7 +839,7 @@
     }
 
     .team-card__role {
-      font-size: 0.78rem;
+      font-size: 0.88rem;
       font-weight: 600;
       color: var(--color-accent);
       text-transform: uppercase;
@@ -717,14 +848,14 @@
     }
 
     .team-card__affiliation {
-      font-size: 0.83rem;
+      font-size: 0.93rem;
       color: var(--color-charcoal);
       line-height: 1.5;
       margin-bottom: 6px;
     }
 
     .team-card__research {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       color: var(--color-muted);
       line-height: 1.55;
     }
@@ -747,10 +878,32 @@
     /* ==========================================
        PARTNERS
     ========================================== */
+    .partners__strip {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      overflow: hidden;
+    }
+
+    .partners__strip-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      white-space: nowrap;
+      padding-left: clamp(20px, 5vw, 60px);
+      flex-shrink: 0;
+    }
+
     .partners__marquee-wrap {
       overflow: hidden;
       position: relative;
-      margin-top: 48px;
+      flex: 1;
     }
 
     /* fade edges */
@@ -1132,11 +1285,8 @@
           <div class="hero__eyebrow">University of Tennessee, Knoxville</div>
           <h1 class="hero__title">AIRE<em>Lab</em></h1>
           <p class="hero__fullname">Artificial Intelligence, Race &amp; Evaluation Lab</p>
-          <p class="hero__tagline">
-            <strong>Optimizing Human Potential</strong> &middot;
-            Disrupting Inequalities &middot;
-            Designing Change with AI
-          </p>
+          <p class="hero__tagline--primary">Optimizing Human Potential</p>
+          <p class="hero__tagline--secondary">Disrupting Inequalities &middot; Designing Change with AI</p>
           <span class="hero__affiliation">College of Education, Health &amp; Human Sciences</span>
           <div class="hero__actions">
             <a href="#research" class="btn btn--primary">Explore Research</a>
@@ -1152,6 +1302,25 @@
       </a>
     </section>
 
+    <!-- Partners strip -->
+    <div class="partners__strip" id="partners">
+      <span class="partners__strip-label">Partners &amp; Funders</span>
+      <div class="partners__marquee-wrap" aria-label="Partners">
+        <div class="partners__track">
+          <div class="partner-card"><img src="assets/logos/ikea_foundation_logo-1-e1690450171181.png" alt="IKEA Foundation"></div>
+          <div class="partner-card"><img src="assets/logos/20210518_penn_populationstudiescenter_non-nested-scaled-1.jpg" alt="Penn Population Studies Center"></div>
+          <div class="partner-card"><img src="assets/logos/ipa.svg" alt="Innovations for Poverty Action"></div>
+          <div class="partner-card"><img src="assets/logos/lmsai-logo.png" alt="Mittal South Asia Institute, Harvard"></div>
+          <div class="partner-card"><img src="assets/logos/nmsdcasset-1404x-1.png" alt="Measurement Justice"></div>
+          <div class="partner-card" aria-hidden="true"><img src="assets/logos/ikea_foundation_logo-1-e1690450171181.png" alt=""></div>
+          <div class="partner-card" aria-hidden="true"><img src="assets/logos/20210518_penn_populationstudiescenter_non-nested-scaled-1.jpg" alt=""></div>
+          <div class="partner-card" aria-hidden="true"><img src="assets/logos/ipa.svg" alt=""></div>
+          <div class="partner-card" aria-hidden="true"><img src="assets/logos/lmsai-logo.png" alt=""></div>
+          <div class="partner-card" aria-hidden="true"><img src="assets/logos/nmsdcasset-1404x-1.png" alt=""></div>
+        </div>
+      </div>
+    </div>
+
     <!-- ==========================================
          ABOUT
     ========================================== -->
@@ -1162,53 +1331,80 @@
             <span class="eyebrow">Our Mission</span>
             <h2 class="section-title">At the Intersection of Learning, Technology &amp; Justice</h2>
             <p>
-              We work at the intersection of learning, technology, and labor markets — conducting
-              culturally responsive evaluations that are fair, transparent, and inclusive.
+              <strong>To tackle algorithmic bias and enable a socially just society grounded in ethics, compassion, and justice.</strong>
             </p>
             <p>
-              Our mission is to tackle algorithmic bias while supporting minorities, students of
-              color, and underprivileged communities toward a socially just society grounded in
-              ethics, compassion, and justice.
+              We do this through the support of minorities, students of color, and underprivileged
+              communities — conducting culturally responsive evaluations that are fair, transparent,
+              and inclusive.
             </p>
             <p>
               AIRELab brings together researchers, educators, and practitioners across disciplines
-              to design AI-driven solutions that genuinely serve all communities — not just the
-              already-privileged.
+              to advance AI for human development — designing solutions that genuinely serve all
+              communities, not just the already-privileged.
             </p>
           </div>
 
-          <div class="about__pillars fade-in stagger">
-            <div class="pillar">
-              <div class="pillar__icon">&#9878;</div>
-              <div class="pillar__body">
-                <h4>Culturally Responsive Evaluation</h4>
-                <p>Rigorous mixed-methods research that centers the voices and contexts of
-                marginalized communities.</p>
+          <div class="about__pillars fade-in">
+            <div class="pillar-slideshow" id="pillarSlideshow">
+              <div class="pillar active">
+                <div class="pillar__image">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <div class="pillar__content">
+                  <div class="pillar__icon">&#9878;</div>
+                  <div class="pillar__body">
+                    <h4>Centering Marginalized Communities</h4>
+                    <p>Culturally responsive evaluation through rigorous mixed-methods research.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar__image">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <div class="pillar__content">
+                  <div class="pillar__icon">&#9670;</div>
+                  <div class="pillar__body">
+                    <h4>Finding &amp; Fixing Algorithmic Bias</h4>
+                    <p>Designing AI fairness from the ground up.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar__image">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <div class="pillar__content">
+                  <div class="pillar__icon">&#9997;</div>
+                  <div class="pillar__body">
+                    <h4>Advancing AI in Education</h4>
+                    <p>Integrating AI into critical pedagogy — building literacy, agency, and critical thinking across all learner levels.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar__image">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <div class="pillar__content">
+                  <div class="pillar__icon">&#127758;</div>
+                  <div class="pillar__body">
+                    <h4>Global Impact</h4>
+                    <p>International partnerships that address displacement, livelihood, and climate-driven human development challenges.</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="pillar">
-              <div class="pillar__icon">&#9670;</div>
-              <div class="pillar__body">
-                <h4>Algorithmic Fairness</h4>
-                <p>Interrogating AI systems for embedded bias and designing equitable alternatives
-                from the ground up.</p>
+            <div class="pillar-controls">
+              <div class="pillar-dots" id="pillarDots">
+                <button class="pillar-dot active" data-index="0" aria-label="Slide 1"></button>
+                <button class="pillar-dot" data-index="1" aria-label="Slide 2"></button>
+                <button class="pillar-dot" data-index="2" aria-label="Slide 3"></button>
+                <button class="pillar-dot" data-index="3" aria-label="Slide 4"></button>
               </div>
-            </div>
-            <div class="pillar">
-              <div class="pillar__icon">&#9997;</div>
-              <div class="pillar__body">
-                <h4>Human-Centered AI in Education</h4>
-                <p>Integrating generative AI into critical pedagogy — building literacy, agency,
-                and critical thinking across all learner levels.</p>
-              </div>
-            </div>
-            <div class="pillar">
-              <div class="pillar__icon">&#127758;</div>
-              <div class="pillar__body">
-                <h4>Global Development Impact</h4>
-                <p>Partnering with international organizations to address displacement, livelihood,
-                and climate-driven human development challenges.</p>
-              </div>
+              <button class="pillar-btn" id="pillarPrev" aria-label="Previous">&#8592;</button>
+              <button class="pillar-btn" id="pillarNext" aria-label="Next">&#8594;</button>
             </div>
           </div>
         </div>
@@ -1235,6 +1431,10 @@
           <article class="project-card fade-in">
             <div class="project-card__badge">Active Research</div>
             <div class="project-card__date">2024 &ndash; Present</div>
+            <div class="project-card__icons">
+              <span title="Advancing AI in Education">&#9997;</span>
+              <span title="Finding &amp; Fixing Algorithmic Bias">&#9670;</span>
+            </div>
             <h3 class="project-card__title">AI-Powered Learning</h3>
             <p class="project-card__desc">
               Examines the future of learning and the labor market in the United States and
@@ -1257,6 +1457,10 @@
           <article class="project-card fade-in">
             <div class="project-card__badge">Active Research</div>
             <div class="project-card__date">2024 &ndash; Present</div>
+            <div class="project-card__icons">
+              <span title="Global Impact">&#127758;</span>
+              <span title="Centering Marginalized Communities">&#9878;</span>
+            </div>
             <h3 class="project-card__title">Sustainable Livelihood for Refugees</h3>
             <p class="project-card__desc">
               Investigates employment barriers and livelihood pathways among Rohingya fathers
@@ -1268,9 +1472,9 @@
               <p class="project-card__pi">
                 Fatima Zahra &middot; Jere Behrman &middot; Nglula Fleurant
               </p>
-              <p class="project-card__funder">
-                <strong>Funded by:</strong> IKEA Foundation
-              </p>
+              <div class="project-card__funders">
+                <img src="assets/logos/ikea_foundation_logo-1-e1690450171181.png" alt="IKEA Foundation">
+              </div>
             </div>
           </article>
 
@@ -1278,6 +1482,10 @@
           <article class="project-card fade-in">
             <div class="project-card__badge">Active Research</div>
             <div class="project-card__date">2023 &ndash; Present</div>
+            <div class="project-card__icons">
+              <span title="Global Impact">&#127758;</span>
+              <span title="Centering Marginalized Communities">&#9878;</span>
+            </div>
             <h3 class="project-card__title">Climate Change &amp; Human Development</h3>
             <p class="project-card__desc">
               Examines the links between climate phenomena — air quality, natural disasters,
@@ -1287,9 +1495,9 @@
             <div class="project-card__meta">
               <p class="project-card__pi-label">Collaboration</p>
               <p class="project-card__pi">University of Pennsylvania</p>
-              <p class="project-card__funder">
-                <strong>Funded by:</strong> National Science Foundation (via University of Pennsylvania)
-              </p>
+              <div class="project-card__funders">
+                <img src="assets/logos/20210518_penn_populationstudiescenter_non-nested-scaled-1.jpg" alt="Penn Population Studies Center">
+              </div>
             </div>
           </article>
 
@@ -1431,6 +1639,23 @@
             </div>
           </div>
 
+          <!-- Dr. Crystal Dilworth -->
+          <div class="team-card fade-in">
+            <div class="avatar av--teal">CD</div>
+            <div class="team-card__body">
+              <h3 class="team-card__name">Dr. Crystal Dilworth</h3>
+              <p class="team-card__role">Affiliate</p>
+              <p class="team-card__affiliation">
+                Instructor, Center for Technology and Management Education<br />
+                California Institute of Technology (Caltech)
+              </p>
+              <p class="team-card__research">
+                <strong>Ph.D.</strong> Molecular Neuroscience, Caltech<br />
+                <strong>Impact Areas:</strong> Human Development, Behavioral Science, STEM Leadership, Public Engagement
+              </p>
+            </div>
+          </div>
+
           <!-- Varun Kilaru -->
           <div class="team-card fade-in">
             <div class="avatar av--rose">VK</div>
@@ -1453,36 +1678,6 @@
     <!-- ==========================================
          PARTNERS
     ========================================== -->
-    <section class="section" id="partners">
-      <div class="container">
-        <div class="section-header fade-in" style="text-align:center; max-width:600px; margin-inline:auto;">
-          <span class="eyebrow">Collaboration</span>
-          <h2 class="section-title">Partners &amp; Funders</h2>
-          <p class="section-lead" style="margin-inline:auto;">
-            Our work is made possible through partnerships with leading organizations committed
-            to evidence, equity, and global development.
-          </p>
-        </div>
-
-        <div class="partners__marquee-wrap fade-in" aria-label="Partners">
-          <div class="partners__track">
-            <!-- original set -->
-            <div class="partner-card"><img src="assets/logos/ikea_foundation_logo-1-e1690450171181.png" alt="IKEA Foundation"></div>
-            <div class="partner-card"><img src="assets/logos/20210518_penn_populationstudiescenter_non-nested-scaled-1.jpg" alt="Penn Population Studies Center"></div>
-            <div class="partner-card"><img src="assets/logos/ipa.svg" alt="Innovations for Poverty Action"></div>
-            <div class="partner-card"><img src="assets/logos/lmsai-logo.png" alt="Mittal South Asia Institute, Harvard"></div>
-            <div class="partner-card"><img src="assets/logos/nmsdcasset-1404x-1.png" alt="Measurement Justice"></div>
-            <!-- duplicate for seamless loop -->
-            <div class="partner-card" aria-hidden="true"><img src="assets/logos/ikea_foundation_logo-1-e1690450171181.png" alt=""></div>
-            <div class="partner-card" aria-hidden="true"><img src="assets/logos/20210518_penn_populationstudiescenter_non-nested-scaled-1.jpg" alt=""></div>
-            <div class="partner-card" aria-hidden="true"><img src="assets/logos/ipa.svg" alt=""></div>
-            <div class="partner-card" aria-hidden="true"><img src="assets/logos/lmsai-logo.png" alt=""></div>
-            <div class="partner-card" aria-hidden="true"><img src="assets/logos/nmsdcasset-1404x-1.png" alt=""></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ==========================================
          NEWS
     ========================================== -->
@@ -1656,6 +1851,37 @@
     });
 
     fadeEls.forEach(el => observer.observe(el));
+
+    // ---- Pillar slideshow ----
+    (function() {
+      const pillars = document.querySelectorAll('#pillarSlideshow .pillar');
+      const dots    = document.querySelectorAll('#pillarDots .pillar-dot');
+      let current   = 0;
+      let timer;
+
+      function show(index) {
+        pillars[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (index + pillars.length) % pillars.length;
+        pillars[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+
+      function startAuto() {
+        timer = setInterval(() => show(current + 1), 3500);
+      }
+
+      function resetAuto() {
+        clearInterval(timer);
+        startAuto();
+      }
+
+      document.getElementById('pillarNext').addEventListener('click', () => { show(current + 1); resetAuto(); });
+      document.getElementById('pillarPrev').addEventListener('click', () => { show(current - 1); resetAuto(); });
+      dots.forEach(dot => dot.addEventListener('click', () => { show(+dot.dataset.index); resetAuto(); }));
+
+      startAuto();
+    })();
 
     // ---- Active nav link highlighting ----
     const sections = document.querySelectorAll('section[id]');
