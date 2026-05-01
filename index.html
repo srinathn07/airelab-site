@@ -571,7 +571,16 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-size: 1.1rem;
+    }
+
+    .pillar__icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--color-accent-dk);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .pillar__body h4 {
@@ -649,60 +658,54 @@
     .project-card {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: 32px 30px;
+      border-top: 3px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: 36px 32px 28px;
       position: relative;
-      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      transition: transform var(--transition), box-shadow var(--transition);
       display: flex;
       flex-direction: column;
-      gap: 0;
     }
 
     .project-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       box-shadow: var(--shadow-lg);
-      border-color: var(--color-accent);
     }
 
     .project-card__badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--color-accent-dk);
-      background: var(--color-accent-lt);
-      border: 1px solid rgba(200,136,42,.25);
-      padding: 5px 12px;
-      border-radius: 999px;
-      margin-bottom: 20px;
-      width: fit-content;
+      margin-bottom: 18px;
     }
 
     .project-card__award {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: #7a5200;
-      background: linear-gradient(135deg, #fff8e6, #fdf0cc);
-      border: 1px solid #f0d080;
-      padding: 5px 12px;
-      border-radius: 999px;
-      margin-top: 18px;
-      width: fit-content;
+      gap: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #6b4700;
+      background: #fffbf0;
+      border-left: 3px solid var(--color-accent);
+      padding: 10px 14px;
+      margin-top: 20px;
+      line-height: 1.4;
     }
 
-    .project-card__award::before { content: '🏆'; font-size: 0.8rem; }
+    .project-card__award svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      stroke: var(--color-accent);
+    }
 
     .project-card__date {
       font-size: 0.78rem;
       font-weight: 600;
-      color: var(--color-accent);
+      color: var(--color-muted);
       letter-spacing: 0.06em;
       text-transform: uppercase;
       margin-bottom: 10px;
@@ -710,30 +713,30 @@
 
     .project-card__title {
       font-family: var(--font-heading);
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       color: var(--color-navy);
-      line-height: 1.25;
-      margin-bottom: 14px;
+      line-height: 1.2;
+      margin-bottom: 16px;
     }
 
     .project-card__desc {
       font-size: 1rem;
       color: var(--color-charcoal);
-      line-height: 1.7;
+      line-height: 1.75;
       flex: 1;
     }
 
     .project-card__meta {
-      margin-top: 20px;
+      margin-top: 24px;
       padding-top: 20px;
       border-top: 1px solid var(--color-border);
     }
 
     .project-card__pi-label {
-      font-size: 0.72rem;
-      font-weight: 600;
+      font-size: 0.7rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       color: var(--color-muted);
       margin-bottom: 6px;
     }
@@ -753,7 +756,7 @@
     .project-card__icons {
       display: flex;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
 
     .project-card__icons span {
@@ -764,7 +767,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.95rem;
+    }
+
+    .project-card__icons svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--color-accent-dk);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .project-card__funders {
@@ -1000,14 +1012,23 @@
     .news-card__icon {
       width: 52px;
       height: 52px;
-      background: linear-gradient(135deg, #fff8e6, #fdf0cc);
-      border: 1px solid #f0d080;
+      background: var(--color-accent-lt);
+      border: 1px solid rgba(200,136,42,.2);
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
       flex-shrink: 0;
+    }
+
+    .news-card__icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--color-accent-dk);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .news-card__date {
@@ -1352,7 +1373,7 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 </div>
                 <div class="pillar__content">
-                  <div class="pillar__icon">&#9878;</div>
+                  <div class="pillar__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l4.5 4.5"/><path d="M7.5 12H12"/></svg></div>
                   <div class="pillar__body">
                     <h4>Centering Marginalized Communities</h4>
                     <p>Culturally responsive evaluation through rigorous mixed-methods research.</p>
@@ -1364,7 +1385,7 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 </div>
                 <div class="pillar__content">
-                  <div class="pillar__icon">&#9670;</div>
+                  <div class="pillar__icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                   <div class="pillar__body">
                     <h4>Finding &amp; Fixing Algorithmic Bias</h4>
                     <p>Designing AI fairness from the ground up.</p>
@@ -1376,7 +1397,7 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 </div>
                 <div class="pillar__content">
-                  <div class="pillar__icon">&#9997;</div>
+                  <div class="pillar__icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
                   <div class="pillar__body">
                     <h4>Advancing AI in Education</h4>
                     <p>Integrating AI into critical pedagogy — building literacy, agency, and critical thinking across all learner levels.</p>
@@ -1388,7 +1409,7 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 </div>
                 <div class="pillar__content">
-                  <div class="pillar__icon">&#127758;</div>
+                  <div class="pillar__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
                   <div class="pillar__body">
                     <h4>Global Impact</h4>
                     <p>International partnerships that address displacement, livelihood, and climate-driven human development challenges.</p>
@@ -1432,8 +1453,8 @@
             <div class="project-card__badge">Active Research</div>
             <div class="project-card__date">2024 &ndash; Present</div>
             <div class="project-card__icons">
-              <span title="Advancing AI in Education">&#9997;</span>
-              <span title="Finding &amp; Fixing Algorithmic Bias">&#9670;</span>
+              <span title="Advancing AI in Education"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+              <span title="Finding &amp; Fixing Algorithmic Bias"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
             </div>
             <h3 class="project-card__title">AI-Powered Learning</h3>
             <p class="project-card__desc">
@@ -1443,6 +1464,7 @@
               through graduate programs.
             </p>
             <div class="project-card__award">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
               Winner &mdash; AAAI/ACM SIGAI Innovative AI Education Award, March 2025
             </div>
             <div class="project-card__meta">
@@ -1458,8 +1480,8 @@
             <div class="project-card__badge">Active Research</div>
             <div class="project-card__date">2024 &ndash; Present</div>
             <div class="project-card__icons">
-              <span title="Global Impact">&#127758;</span>
-              <span title="Centering Marginalized Communities">&#9878;</span>
+              <span title="Global Impact"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+              <span title="Centering Marginalized Communities"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l4.5 4.5"/><path d="M7.5 12H12"/></svg></span>
             </div>
             <h3 class="project-card__title">Sustainable Livelihood for Refugees</h3>
             <p class="project-card__desc">
@@ -1483,8 +1505,8 @@
             <div class="project-card__badge">Active Research</div>
             <div class="project-card__date">2023 &ndash; Present</div>
             <div class="project-card__icons">
-              <span title="Global Impact">&#127758;</span>
-              <span title="Centering Marginalized Communities">&#9878;</span>
+              <span title="Global Impact"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+              <span title="Centering Marginalized Communities"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l4.5 4.5"/><path d="M7.5 12H12"/></svg></span>
             </div>
             <h3 class="project-card__title">Climate Change &amp; Human Development</h3>
             <p class="project-card__desc">
@@ -1690,7 +1712,7 @@
 
         <div class="news__inner fade-in">
           <div class="news-card">
-            <div class="news-card__icon">&#127942;</div>
+            <div class="news-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></div>
             <div>
               <p class="news-card__date">March 2025</p>
               <h3 class="news-card__title">
