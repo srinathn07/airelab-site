@@ -806,72 +806,107 @@
     ========================================== */
     .team__grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
     }
 
     .team-card {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: 28px 24px 24px;
+      padding: 32px 24px 24px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
+      align-items: center;
+      gap: 0;
       transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
     }
 
     .team-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       box-shadow: var(--shadow-md);
       border-color: rgba(255,102,0,.4);
     }
 
+    .team-card__photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid var(--color-border);
+      margin-bottom: 20px;
+      flex-shrink: 0;
+      transition: border-color var(--transition);
+    }
+
+    .team-card:hover .team-card__photo {
+      border-color: rgba(255,102,0,.55);
+    }
+
     .avatar {
-      width: 56px;
-      height: 56px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: #fff;
       letter-spacing: 0.02em;
       flex-shrink: 0;
+      margin-bottom: 20px;
     }
 
-    .team-card__body { flex: 1; }
+    .team-card__body {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
 
     .team-card__name {
       font-family: var(--font-heading);
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       color: var(--color-navy);
       line-height: 1.25;
-      margin-bottom: 2px;
+      margin-bottom: 5px;
+      text-align: center;
     }
 
     .team-card__role {
-      font-size: 0.88rem;
+      font-size: 0.75rem;
       font-weight: 600;
       color: var(--color-accent);
       text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-bottom: 8px;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+      text-align: center;
     }
 
     .team-card__affiliation {
-      font-size: 0.93rem;
+      font-size: 0.88rem;
       color: var(--color-charcoal);
       line-height: 1.5;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
+    }
+
+    .team-card__bio {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      line-height: 1.65;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .team-card__research {
-      font-size: 0.9rem;
+      font-size: 0.83rem;
       color: var(--color-muted);
-      line-height: 1.55;
+      line-height: 1.5;
     }
 
     .team-card__research strong {
@@ -1547,7 +1582,7 @@
 
           <!-- Fatima Zahra -->
           <div class="team-card fade-in">
-            <div class="avatar av--navy">FZ</div>
+            <img class="team-card__photo" src="assets/contributors_pics/zahra.webp" alt="Dr. Fatima T. Zahra" />
             <div class="team-card__body">
               <h3 class="team-card__name">Dr. Fatima T. Zahra</h3>
               <p class="team-card__role">Founder &amp; Principal Investigator</p>
@@ -1555,68 +1590,113 @@
                 Assistant Professor, Evaluation, Statistics &amp; Research Methodology<br />
                 University of Tennessee, Knoxville
               </p>
+              <p class="team-card__bio">
+                Dr. Zahra holds a Ph.D. in Interdisciplinary Studies in Human Development from the University of Pennsylvania. Beyond tackling inequalities, she finds balance in boxing, meditation, music, and poetry.
+              </p>
               <p class="team-card__research">
-                <strong>Ph.D.</strong> Interdisciplinary Studies in Human Development, University of Pennsylvania<br />
-                <strong>Research:</strong> Culturally responsive evaluation, AI in education, labor markets
+                <strong>Research:</strong> Culturally responsive evaluation; AI in education; future of learning and labor markets; sustainable development
               </p>
             </div>
           </div>
 
           <!-- David Bowers -->
           <div class="team-card fade-in">
-            <div class="avatar av--teal">DB</div>
+            <img class="team-card__photo" src="assets/contributors_pics/bowers.jpg" alt="Dr. David M. Bowers" />
             <div class="team-card__body">
               <h3 class="team-card__name">Dr. David M. Bowers</h3>
-              <p class="team-card__role">Faculty Researcher</p>
+              <p class="team-card__role">Affiliate</p>
               <p class="team-card__affiliation">
                 Research Assistant Professor, Theory &amp; Practice in Teacher Education<br />
                 University of Tennessee, Knoxville
               </p>
+              <p class="team-card__bio">
+                Dr. Bowers (they/them) holds a Ph.D. in Mathematics Education from Michigan State University and Masters degrees from The Ohio State University. Outside academia, they love engaging with art and cherish time with their partner and children.
+              </p>
               <p class="team-card__research">
-                <strong>Ph.D.</strong> Mathematics Education, Michigan State University<br />
-                <strong>Research:</strong> Sociopolitical analysis of education, power dynamics
+                <strong>Research:</strong> Sociopolitical and ethical analysis of education; critique of power and ideology; methodologies informed by direct action
               </p>
             </div>
           </div>
 
           <!-- Jiangen He -->
           <div class="team-card fade-in">
-            <div class="avatar av--forest">JH</div>
+            <img class="team-card__photo" src="assets/contributors_pics/jiangen.webp" alt="Dr. Jiangen He" />
             <div class="team-card__body">
               <h3 class="team-card__name">Dr. Jiangen He</h3>
-              <p class="team-card__role">Faculty Researcher</p>
+              <p class="team-card__role">Research Affiliate</p>
               <p class="team-card__affiliation">
                 Assistant Professor, School of Information Sciences<br />
                 University of Tennessee, Knoxville
               </p>
+              <p class="team-card__bio">
+                Dr. He earned his Ph.D. in Information Studies from Drexel University. His research spans science of science, human-AI interaction, and visual analytics. He enjoys yoga, hiking scenic trails, and weightlifting.
+              </p>
               <p class="team-card__research">
-                <strong>Ph.D.</strong> Information Studies, Drexel University<br />
-                <strong>Research:</strong> Science of science, human-AI interaction, visual analytics
+                <strong>Research:</strong> Science of science; human-AI interaction; visual analytics; AI impacts on knowledge creation
+              </p>
+            </div>
+          </div>
+
+          <!-- Hope Chidziwisano -->
+          <div class="team-card fade-in">
+            <img class="team-card__photo" src="assets/contributors_pics/hope.jpg" alt="Dr. Hope Chidziwisano" />
+            <div class="team-card__body">
+              <h3 class="team-card__name">Dr. Hope Chidziwisano</h3>
+              <p class="team-card__role">Research Affiliate</p>
+              <p class="team-card__affiliation">
+                Assistant Professor, School of Information Sciences<br />
+                University of Tennessee, Knoxville
+              </p>
+              <p class="team-card__bio">
+                Dr. Chidziwisano designs sensing and AI technologies for resource-constrained areas. A former postdoctoral fellow at Carnegie Mellon's Human-Computer Interaction Institute, he earned his Ph.D. from Michigan State University.
+              </p>
+              <p class="team-card__research">
+                <strong>Research:</strong> Sensing and AI for resource-constrained contexts; human-centered design; HCI
+              </p>
+            </div>
+          </div>
+
+          <!-- Frances Harper -->
+          <div class="team-card fade-in">
+            <img class="team-card__photo" src="assets/contributors_pics/frances.png" alt="Dr. Frances Harper" />
+            <div class="team-card__body">
+              <h3 class="team-card__name">Dr. Frances Harper</h3>
+              <p class="team-card__role">Affiliate</p>
+              <p class="team-card__affiliation">
+                Associate Professor, STEM Education<br />
+                University of Tennessee, Knoxville
+              </p>
+              <p class="team-card__bio">
+                Dr. Harper is a critical community-engaged scholar whose research examines how formal and informal education can promote equity in STEM, particularly in PreK-9 mathematics and early computing education.
+              </p>
+              <p class="team-card__research">
+                <strong>Research:</strong> Equity-driven STEM education; school-family-community partnerships; children's identity in STEM
               </p>
             </div>
           </div>
 
           <!-- Rushad Faridi -->
           <div class="team-card fade-in">
-            <div class="avatar av--rust">RF</div>
+            <img class="team-card__photo" src="assets/contributors_pics/rushad.jpg" alt="Dr. Rushad Faridi" />
             <div class="team-card__body">
               <h3 class="team-card__name">Dr. Rushad Faridi</h3>
-              <p class="team-card__role">Postdoctoral Affiliate</p>
+              <p class="team-card__role">Postdoctoral Researcher</p>
               <p class="team-card__affiliation">
-                Postdoctoral Researcher<br />
-                AIRELab, UTK
+                AIRELab, University of Tennessee, Knoxville
+              </p>
+              <p class="team-card__bio">
+                An economist and data scientist with two decades of teaching experience across Bangladesh and the US. Dr. Faridi's policy evaluation work spans engagements with the World Bank, UNICEF, and JICA.
               </p>
               <p class="team-card__research">
                 <strong>Ph.D.</strong> Economics, Virginia Tech<br />
-                <strong>Experience:</strong> World Bank, UNICEF, JICA<br />
-                <strong>Research:</strong> Development economics, ML for social impact
+                <strong>Research:</strong> Development economics; survey data analysis; machine learning for social impact
               </p>
             </div>
           </div>
 
           <!-- Hanhui Bao -->
           <div class="team-card fade-in">
-            <div class="avatar av--violet">HB</div>
+            <img class="team-card__photo" src="assets/contributors_pics/hanhui.JPG" alt="Hanhui Bao" />
             <div class="team-card__body">
               <h3 class="team-card__name">Hanhui Bao</h3>
               <p class="team-card__role">Ph.D. Student</p>
@@ -1631,15 +1711,30 @@
             </div>
           </div>
 
+          <!-- Rachel Wong -->
+          <div class="team-card fade-in">
+            <img class="team-card__photo" src="assets/contributors_pics/rachel.jpeg" alt="Rachel Wong" />
+            <div class="team-card__body">
+              <h3 class="team-card__name">Rachel Wong</h3>
+              <p class="team-card__role">Research Assistant</p>
+              <p class="team-card__affiliation">
+                University of Tennessee, Knoxville
+              </p>
+            </div>
+          </div>
+
           <!-- Srinath Narayanan -->
           <div class="team-card fade-in">
-            <div class="avatar av--amber">SN</div>
+            <img class="team-card__photo" src="assets/contributors_pics/srinath.png" alt="Srinath Narayanan" />
             <div class="team-card__body">
               <h3 class="team-card__name">Srinath Narayanan</h3>
               <p class="team-card__role">Undergraduate Research Assistant</p>
               <p class="team-card__affiliation">
                 Computer Science<br />
                 University of Tennessee, Knoxville
+              </p>
+              <p class="team-card__bio">
+                An aspiring AI innovator building technologies that improve lives -- from autonomous systems to educational platforms for underserved students. Committed to making AI accessible and ethical. Enjoys tennis and pickleball.
               </p>
               <p class="team-card__research">
                 <strong>Research:</strong> AGI, RAG models, AI in education
@@ -1649,13 +1744,16 @@
 
           <!-- Leah Funderburg -->
           <div class="team-card fade-in">
-            <div class="avatar av--slate">LF</div>
+            <img class="team-card__photo" src="assets/contributors_pics/leah.jpg" alt="Leah Funderburg" />
             <div class="team-card__body">
               <h3 class="team-card__name">Leah Funderburg</h3>
               <p class="team-card__role">Undergraduate Research Assistant</p>
               <p class="team-card__affiliation">
-                Data Science &amp; Computer Science<br />
+                Data Science with Minor in Computer Science<br />
                 University of Tennessee, Knoxville
+              </p>
+              <p class="team-card__bio">
+                An undergraduate at UTK applying predictive data analysis and machine learning to real-world societal issues, with a focus on AI's impact on education and early career pathways. Enjoys traveling and reading.
               </p>
               <p class="team-card__research">
                 <strong>Research:</strong> Machine learning, AI in education and labor markets
@@ -1675,7 +1773,7 @@
               </p>
               <p class="team-card__research">
                 <strong>Ph.D.</strong> Molecular Neuroscience, Caltech<br />
-                <strong>Impact Areas:</strong> Human Development, Behavioral Science, STEM Leadership, Public Engagement
+                <strong>Impact areas:</strong> Human development, behavioral science, STEM leadership, public engagement
               </p>
             </div>
           </div>
