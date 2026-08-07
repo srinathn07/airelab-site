@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIRELab</title>
+  <script>
+    // GitHub Pages has no server-side routing, so any unknown path (including
+    // clean section URLs like /about) lands here. Stash the intended path and
+    // bounce to the homepage; index.html reads it back and scrolls into place.
+    sessionStorage.setItem('spa-redirect', location.pathname + location.search);
+    location.replace('/');
+  </script>
+  <meta http-equiv="refresh" content="0; url=/">
+</head>
+<body>
+  <p>Redirecting to the <a href="/">AIRELab homepage</a>&hellip;</p>
+</body>
+</html>
