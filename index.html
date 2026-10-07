@@ -988,6 +988,17 @@
 
     .team__section-label:first-child { margin-top: 0; }
 
+    /* Pair: label + card stacked in one grid column */
+    .team__pair {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .team__pair .team__section-label {
+      grid-column: unset;
+      margin-top: 0;
+    }
+
     /* Hover bio overlay */
     .team-card__overlay {
       position: absolute;
@@ -1226,6 +1237,192 @@
     }
 
     /* ==========================================
+       PUBLICATIONS
+    ========================================== */
+    .pub-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    .pub-section__heading {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      color: var(--color-navy);
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--color-accent);
+      display: inline-block;
+    }
+
+    .pub-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      counter-reset: pub-counter;
+    }
+
+    .pub-entry {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 0 16px;
+      padding: 20px 24px 20px 0;
+      border-bottom: 1px solid var(--color-border);
+      counter-increment: pub-counter;
+    }
+
+    .pub-entry:last-child { border-bottom: none; }
+
+    .pub-entry__num {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      padding-top: 3px;
+      text-align: right;
+    }
+
+    .pub-entry__num::before { content: counter(pub-counter); }
+
+    .pub-entry__title {
+      font-weight: 600;
+      color: var(--color-navy);
+      font-size: 1rem;
+      line-height: 1.55;
+      margin-bottom: 5px;
+    }
+
+    .pub-entry__authors {
+      color: var(--color-charcoal);
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .pub-entry__meta {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+
+    .pub-entry__title a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-border);
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .pub-entry__title a:hover {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    .pub-entry__tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--color-accent-lt);
+      color: var(--color-accent-dk);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ==========================================
+       ABSTRACT MODAL
+    ========================================== */
+    .pub-abstract-btn {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--color-accent);
+      background: none;
+      border: 1px solid var(--color-accent);
+      border-radius: 4px;
+      padding: 3px 10px;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+    .pub-abstract-btn:hover {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .pub-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: rgba(0,0,0,0.55);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .pub-modal.open { display: flex; }
+
+    .pub-modal__box {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      max-width: 680px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 40px 36px 36px;
+      position: relative;
+    }
+
+    .pub-modal__close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--color-muted);
+      transition: color var(--transition);
+    }
+    .pub-modal__close:hover { color: var(--color-navy); }
+
+    .pub-modal__label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 10px;
+    }
+
+    .pub-modal__title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: var(--color-navy);
+      line-height: 1.4;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .pub-modal__abstract {
+      font-size: 0.95rem;
+      color: var(--color-charcoal);
+      line-height: 1.8;
+    }
+
+    .pub-modal__keywords {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      font-style: italic;
+    }
+
+    /* ==========================================
        CONTACT
     ========================================== */
     .contact__grid {
@@ -1430,6 +1627,7 @@
           <li><a href="/partners">Partners</a></li>
           <li><a href="/news">News</a></li>
           <li><a href="/media">Media</a></li>
+          <li><a href="/publications">Publications</a></li>
           <li><a href="/contact" class="nav__cta">Contact</a></li>
         </ul>
         <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -1448,6 +1646,7 @@
       <li><a href="/partners">Partners</a></li>
       <li><a href="/news">News</a></li>
       <li><a href="/media">Media</a></li>
+      <li><a href="/publications">Publications</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>
   </div>
@@ -1715,30 +1914,51 @@
 
         <div class="team__grid stagger">
 
-          <div class="team__section-label">Founder</div>
-
-          <!-- Fatima Zahra -->
-          <div class="team-card fade-in">
-            <img class="team-card__photo" src="assets/contributors_pics/zahra.webp" alt="Dr. Fatima T. Zahra" />
-            <div class="team-card__body">
-              <h3 class="team-card__name">Dr. Fatima T. Zahra</h3>
-              <p class="team-card__role">Founder &amp; Principal Investigator</p>
-              <p class="team-card__affiliation">
-                Assistant Professor, Evaluation, Statistics &amp; Research Methodology<br />
-                University of Tennessee, Knoxville
-              </p>
-              <p class="team-card__bio">
-                Dr. Zahra holds a Ph.D. in Interdisciplinary Studies in Human Development from the University of Pennsylvania. Beyond tackling inequalities, she finds balance in boxing, meditation, music, and poetry.
-              </p>
-              <p class="team-card__research">
-                <strong>Research:</strong> Culturally responsive evaluation; AI in education; future of learning and labor markets; sustainable development
-              </p>
+          <div class="team__pair">
+            <div class="team__section-label">Founder</div>
+            <!-- Fatima Zahra -->
+            <div class="team-card fade-in">
+              <img class="team-card__photo" src="assets/contributors_pics/zahra.webp" alt="Dr. Fatima T. Zahra" />
+              <div class="team-card__body">
+                <h3 class="team-card__name">Dr. Fatima T. Zahra</h3>
+                <p class="team-card__role">Founder &amp; Principal Investigator</p>
+                <p class="team-card__affiliation">
+                  Assistant Professor, Evaluation, Statistics &amp; Research Methodology<br />
+                  University of Tennessee, Knoxville
+                </p>
+                <p class="team-card__bio">
+                  Dr. Zahra holds a Ph.D. in Interdisciplinary Studies in Human Development from the University of Pennsylvania. Beyond tackling inequalities, she finds balance in boxing, meditation, music, and poetry.
+                </p>
+                <p class="team-card__research">
+                  <strong>Research:</strong> Culturally responsive evaluation; AI in education; future of learning and labor markets; sustainable development
+                </p>
+              </div>
+              <div class="team-card__overlay">
+                <p class="team-card__overlay-name">Dr. Fatima T. Zahra</p>
+                <p class="team-card__overlay-role">Founder &amp; Principal Investigator</p>
+                <p class="team-card__overlay-bio">Dr. Fatima T. Zahra (Dr. Z) is an Assistant Professor at the University of Tennessee, Knoxville. She holds a Ph.D. in Interdisciplinary Studies in Human Development from the University of Pennsylvania. Beyond her quest to tackle inequalities, Dr. Zahra cherishes time with her multicultural family and finds balance in boxing, meditation, music, and poetry.</p>
+                <p class="team-card__overlay-research"><strong>Research:</strong> Culturally responsive evaluation; future of learning and labor markets; sustainable development; AI in education and evaluation</p>
+              </div>
             </div>
-            <div class="team-card__overlay">
-              <p class="team-card__overlay-name">Dr. Fatima T. Zahra</p>
-              <p class="team-card__overlay-role">Founder &amp; Principal Investigator</p>
-              <p class="team-card__overlay-bio">Dr. Fatima T. Zahra (Dr. Z) is an Assistant Professor at the University of Tennessee, Knoxville. She holds a Ph.D. in Interdisciplinary Studies in Human Development from the University of Pennsylvania. Beyond her quest to tackle inequalities, Dr. Zahra cherishes time with her multicultural family and finds balance in boxing, meditation, music, and poetry.</p>
-              <p class="team-card__overlay-research"><strong>Research:</strong> Culturally responsive evaluation; future of learning and labor markets; sustainable development; AI in education and evaluation</p>
+          </div>
+
+          <div class="team__pair">
+            <div class="team__section-label">Postdoctoral Researcher</div>
+            <!-- Gan Jin -->
+            <div class="team-card fade-in">
+              <div class="avatar av--amber">GJ</div>
+              <div class="team-card__body">
+                <h3 class="team-card__name">Dr. Gan Jin</h3>
+                <p class="team-card__role">Postdoctoral Researcher</p>
+                <p class="team-card__affiliation">
+                  AIRELab, University of Tennessee, Knoxville
+                </p>
+              </div>
+              <div class="team-card__overlay">
+                <p class="team-card__overlay-name">Dr. Gan Jin</p>
+                <p class="team-card__overlay-role">Postdoctoral Researcher</p>
+                <p class="team-card__overlay-bio">Postdoctoral Researcher at AIRELab, University of Tennessee, Knoxville.</p>
+              </div>
             </div>
           </div>
 
@@ -2019,6 +2239,88 @@
     </section>
 
     <!-- ==========================================
+         PUBLICATIONS
+    ========================================== -->
+    <section class="section" id="publications">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="eyebrow">Scholarship</span>
+          <h2 class="section-title">Publications</h2>
+        </div>
+
+        <div class="pub-sections">
+
+          <div class="fade-in">
+            <h3 class="pub-section__heading">Working Papers</h3>
+            <ol class="pub-list">
+              <li class="pub-entry">
+                <span class="pub-entry__num"></span>
+                <div>
+                  <p class="pub-entry__title">Daughters, sons, and the future of learning in the Rohingya camps: What do fathers really think and aspire for?<span class="pub-entry__tag">Submitted</span></p>
+                  <p class="pub-entry__authors">Zahra, F. T., Sunny, S., Bolisetty, S., &amp; Karim, A.</p>
+                  <p class="pub-entry__meta"><em>Sex Roles</em></p>
+                  <button class="pub-abstract-btn" data-pub="rohingya">Abstract</button>
+                </div>
+              </li>
+              <li class="pub-entry">
+                <span class="pub-entry__num"></span>
+                <div>
+                  <p class="pub-entry__title">The Evaluation Vacuum: A Qualitative Needs Evaluation of AI Workforce Capability Development in Bangladesh<span class="pub-entry__tag">Submitted</span></p>
+                  <p class="pub-entry__authors">Zahra, F. T., &amp; Chowdhury, S.</p>
+                  <p class="pub-entry__meta"><em>Evaluation</em></p>
+                  <button class="pub-abstract-btn" data-pub="eval-vacuum">Abstract</button>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="fade-in">
+            <h3 class="pub-section__heading">Archives</h3>
+            <ol class="pub-list">
+              <li class="pub-entry">
+                <span class="pub-entry__num"></span>
+                <div>
+                  <p class="pub-entry__title"><a href="https://arxiv.org/abs/2609.38029" target="_blank" rel="noopener">Critical Thinking with Generative AI: A Constraint-First Design Pilot of a Thinking-Partner Intervention</a></p>
+                  <p class="pub-entry__authors">Zahra, F. T., He, J., Bowers, D. M., &amp; Wang, W.</p>
+                  <p class="pub-entry__meta">2026 · <em>arXiv</em> preprint arXiv:2609.38029 · cs.HC</p>
+                  <button class="pub-abstract-btn" data-pub="critical-thinking">Abstract</button>
+                </div>
+              </li>
+              <li class="pub-entry">
+                <span class="pub-entry__num"></span>
+                <div>
+                  <p class="pub-entry__title"><a href="https://arxiv.org/abs/2609.37880" target="_blank" rel="noopener">Fluency Without Evidence: Constraint-First Design and the Limits of Self-Report in AI-Assisted Learning</a></p>
+                  <p class="pub-entry__authors">Zahra, F. T., Wang, W., Harper, F., &amp; He, J.</p>
+                  <p class="pub-entry__meta">2026 · <em>arXiv</em> preprint arXiv:2609.37880 · cs.HC</p>
+                  <button class="pub-abstract-btn" data-pub="fluency">Abstract</button>
+                </div>
+              </li>
+              <li class="pub-entry">
+                <span class="pub-entry__num"></span>
+                <div>
+                  <p class="pub-entry__title"><a href="https://arxiv.org/abs/2610.00338" target="_blank" rel="noopener">Three Pathways of Student-AI Interaction: Constraint-First Design for Higher-Order Thinking</a></p>
+                  <p class="pub-entry__authors">Zahra, F. T.</p>
+                  <p class="pub-entry__meta">2026 · <em>arXiv</em> preprint arXiv:2610.00338 · cs.HC</p>
+                  <button class="pub-abstract-btn" data-pub="three-pathways">Abstract</button>
+                </div>
+              </li>
+              <li class="pub-entry">
+                <span class="pub-entry__num"></span>
+                <div>
+                  <p class="pub-entry__title"><a href="https://arxiv.org/abs/2609.24934" target="_blank" rel="noopener">Whose Facts Count? A Culturally Responsive Audit of LLM Evaluation Benchmarks</a></p>
+                  <p class="pub-entry__authors">Zahra, F. T., Islam Sk., Md. S., &amp; Chung, R.</p>
+                  <p class="pub-entry__meta">2026 · <em>arXiv</em> preprint arXiv:2609.24934 · cs.HC</p>
+                  <button class="pub-abstract-btn" data-pub="whose-facts">Abstract</button>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
          CONTACT
     ========================================== -->
     <section class="section" id="contact">
@@ -2080,6 +2382,17 @@
     </section>
 
   </main>
+
+  <!-- Abstract Modal -->
+  <div class="pub-modal" id="pubModal" role="dialog" aria-modal="true" aria-labelledby="pubModalTitle">
+    <div class="pub-modal__box">
+      <button class="pub-modal__close" id="pubModalClose" aria-label="Close">&times;</button>
+      <p class="pub-modal__label">Abstract</p>
+      <h2 class="pub-modal__title" id="pubModalTitle"></h2>
+      <p class="pub-modal__abstract" id="pubModalAbstract"></p>
+      <p class="pub-modal__keywords" id="pubModalKeywords"></p>
+    </div>
+  </div>
 
   <!-- ==========================================
        FOOTER
@@ -2227,6 +2540,72 @@
     window.addEventListener('popstate', () => {
       scrollToPath(window.location.pathname, 'smooth');
     });
+  </script>
+
+  <script>
+    // ---- Publication abstract modal ----
+    const pubData = {
+      'rohingya': {
+        title: 'Daughters, sons, and the future of learning in the Rohingya camps: What do fathers really think and aspire for?',
+        abstract: 'Humanitarian research has increasingly recognized the role of gender norms in shaping family life during displacement, yet fathers\' roles in children\'s everyday learning and aspirations remain underexplored. This article examines how Rohingya fathers in refugee camps in Bangladesh understand and enact their responsibilities toward sons and daughters amid prolonged displacement and restricted livelihood opportunities. Drawing on qualitative data from interviews and observations conducted in collaboration with a humanitarian education programme, the study explores how fathers navigate tensions between provider ideals, caregiving expectations, and shifting gender norms. Findings show that while fathers continue to emphasize sons\' future economic responsibilities, they also express growing concern for daughters\' education and well-being, reflecting both continuity and change in gendered parenting practices. These shifts are shaped by camp conditions, humanitarian interventions, and fathers\' own experiences of displacement. The article highlights how engaging fathers can support more gender-responsive approaches to education and parenting in humanitarian settings, with implications for programmes seeking to promote children\'s learning and well-being without reinforcing restrictive gender norms.',
+        keywords: 'Rohingya; fatherhood; gender norms; children; forced displacement; Bangladesh'
+      },
+      'eval-vacuum': {
+        title: 'The Evaluation Vacuum: A Qualitative Needs Evaluation of AI Workforce Capability Development in Bangladesh',
+        abstract: 'This qualitative evaluation of Bangladesh\'s AI-labor market capability development system draws on 50 interviews with senior government officials and industry leaders across 12 sectors, framed by culturally responsive evaluation, the capability approach, and developmental evaluation. Three findings follow. Employers in every sector described a credential-capability gap. All 26 government-side informants described public AI training programs designed without evaluation as a learning or accountability mechanism, which we call the evaluation vacuum. Officials also described absent AI programming for women, rural schools without basic infrastructure, and household income as the determinant of AI preparation, conditions that place the cost of unevaluated programs on those least able to bear it. We document all three from institutional vantage points, distinguishing what the data establish from what they make plausible for the people these decisions affect. We offer the evaluation vacuum as a concept for evaluators whose first task is making evaluation possible at all.',
+        keywords: 'culturally responsive evaluation; evaluation vacuum; capability approach; Bangladesh; labor market'
+      },
+      'critical-thinking': {
+        title: 'Critical Thinking with Generative AI: A Constraint-First Design Pilot of a Thinking-Partner Intervention',
+        abstract: 'This pilot study examined how ChatGPT functioned as a thinking partner in an undergraduate research methods course with 14 students during Spring 2025. The research combined standardized assessments measuring statistical learning, AI literacy, and critical thinking with qualitative analysis of student interactions. Results showed improvements in domain knowledge and self-reported AI literacy, but standardized critical thinking metrics remained unchanged. Analysis revealed students typically positioned the AI as a validator rather than dialogue partner, with curriculum design significantly influencing engagement depth. The authors conclude that one semester of GenAI-assisted instruction can move domain learning and self-reported AI literacy but does not move standardized critical thinking, suggesting the need for intentional framework design to foster deeper analytical engagement with AI tools.',
+        keywords: ''
+      },
+      'fluency': {
+        title: 'Fluency Without Evidence: Constraint-First Design and the Limits of Self-Report in AI-Assisted Learning',
+        abstract: 'The research employed design-based methods across two graduate research methods courses. Students interacted with an AI teaching partner using a constraint-first approach — requiring them to articulate and defend positions before receiving feedback. Key findings indicate that AI literacy improved, particularly regarding understanding AI concepts. However, critical thinking, metacognitive awareness, and knowledge retention showed no meaningful gains. Changes were limited to self-report measures and may reflect growth in confidence instead of capacity. Critically, interaction records revealed limited exchanges, inconsistent use of the constraint-first sequence, and incomplete data capture. The researchers conclude that dependable AI-assisted learning designs require interaction records rather than relying solely on self-reported outcomes.',
+        keywords: ''
+      },
+      'three-pathways': {
+        title: 'Three Pathways of Student-AI Interaction: Constraint-First Design for Higher-Order Thinking',
+        abstract: 'How students interact with artificial intelligence (AI) systems in educational settings may determine whether that interaction supports or displaces critical thinking. The paper presents two main contributions: a typological framework called the Three Paths of Student-AI Interaction, which categorizes engagement into Passive Review, Direct Question, and Strategic Dialogue modes; and the Next Level Teaching Blueprint (NLTB), an instructional design approach intended to promote Strategic Dialogue. The research analyzed 50 student-AI interaction messages from an undergraduate research methods course using qualitative content analysis. Two human coders achieved 68% agreement, with 80% specifically on Strategic Dialogue identification. The findings showed Passive Review accounted for 46% of exchanges, Direct Question for 18%, and Strategic Dialogue for 36%. A second dataset demonstrated predominantly Strategic Dialogue content, suggesting instructional framing influences which interaction pathway students adopt.',
+        keywords: ''
+      },
+      'whose-facts': {
+        title: 'Whose Facts Count? A Culturally Responsive Audit of LLM Evaluation Benchmarks',
+        abstract: 'LLM benchmarks function as evaluation instruments, informing decisions that affect education, labor, and public services worldwide. The research applies culturally responsive evaluation frameworks to audit OpenAI\'s SimpleQA and LMSYS Chatbot Arena, revealing significant structural biases. Key findings include that SimpleQA questions require English-language archival verification, and a single rater\'s focus on Colombian history inflates apparent Global South representation by 2.70%. Additionally, English-language prompts dominate the Arena at 76.3%, far exceeding the estimated 25.9% global share of English-speaking internet users. A counter-benchmark demonstrated substantially lower cultural responsiveness deficits, suggesting current instruments contain fundamental validity issues that disadvantage communities outside their design assumptions.',
+        keywords: ''
+      }
+    };
+
+    const modal     = document.getElementById('pubModal');
+    const modalTitle    = document.getElementById('pubModalTitle');
+    const modalAbstract = document.getElementById('pubModalAbstract');
+    const modalKeywords = document.getElementById('pubModalKeywords');
+    const modalClose    = document.getElementById('pubModalClose');
+
+    function openModal(id) {
+      const data = pubData[id];
+      if (!data) return;
+      modalTitle.textContent    = data.title;
+      modalAbstract.textContent = data.abstract;
+      modalKeywords.textContent = data.keywords ? 'Keywords: ' + data.keywords : '';
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      modalClose.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.pub-abstract-btn').forEach(btn => {
+      btn.addEventListener('click', () => openModal(btn.dataset.pub));
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   </script>
 </body>
 </html>
